@@ -1,27 +1,32 @@
+import { Reorder } from "framer-motion";
 import TodoItem from "./TodoItem";
 
 const TodoList = (props) => {
+  const { handleUpdateTodoStatus, handleTodoRemove, setTodos, todos } = props;
+
   return (
     <div className="todo-list">
-      <ul>
-        {props.todos.map((todo) => {
+      <Reorder.Group axis="y" values={todos} onReorder={setTodos}>
+        {todos.map((todo) => {
           return (
-            <li key={todo.id}>
-              <TodoItem 
-                todo={todo}
-                handleTodoUpdate={props.handleTodoUpdate}
-                handleTodoComplete={props.handleTodoComplete}
-                handleTodoRemove={props.handleTodoRemove}
-              />
-            </li>
+            <TodoItem 
+              key={todo.id}
+              todo={todo}
+              handleUpdateTodoStatus={handleUpdateTodoStatus}
+              handleTodoRemove={handleTodoRemove}
+            />
           );
         })}
-      </ul>
+      </Reorder.Group>
     </div>
   );
 }
 
 export default TodoList;
+
+
+ 
+
 
 
 

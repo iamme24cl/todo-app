@@ -52,24 +52,7 @@ const App = () => {
     }
   }
 
-  const handleTodoUpdate = async (e, id, updatedTask) => {
-    if (e.key === "Enter") {
-      try {
-        const { data } = axios.put(`${baseUrl}api/todos/${id}`, {
-          todo: {task: updatedTask}
-        });
-        if (data.status === 202) {
-          const todosCopy = [ ...todos ];
-          todosCopy.find(todo => todo.id === id).task = data.task;
-          setTodos(todosCopy);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  }
-
-  const handleTodoComplete = async (id) => {
+  const handleUpdateTodoStatus = async (id) => {
     try {
       const todosCopy = [ ...todos ];
       let todo = todosCopy.find(todo => todo.id === id);
@@ -113,11 +96,10 @@ const App = () => {
       />
       <TodoList
         task={task}
-        setTask={setTask}
         todos={todos}
-        handleTodoUpdate={handleTodoUpdate}
+        setTodos={setTodos}
         handleTodoRemove={handleTodoRemove}
-        handleTodoComplete={handleTodoComplete}
+        handleUpdateTodoStatus={handleUpdateTodoStatus}
       />
     </div>
   );

@@ -1,31 +1,28 @@
 import React, { useState } from "react";
+import { useMotionValue, Reorder } from "framer-motion";
 
 const TodoItem = (props) => {
-  const [updatedTask, setUpdatedTask] = useState("");
+  const { todo, handleUpdateTodoStatus, handleTodoRemove } = props;
 
   return (
-    <div className="todo-item">
-      <div onClick={() => props.handleTodoComplete(props.todo.id)}>
-        {props.todo.isCompleted ? (
+    <Reorder.Item value={todo} id={todo.id}  className="todo-item">
+      <div onClick={() => handleUpdateTodoStatus(todo.id)}>
+        {todo.isCompleted ? (
           <span className="todo-complete">✓</span>
         ) : (
           <span className="todo-incomplete" />
         )}
       </div>
-      <div className="todo-item-input-wrapper">
-          <input 
-            value={updatedTask.length > 0 ? updatedTask : props.todo.task}
-            onKeyPress={e => props.handleTodoUpdate(e, props.todo.id, updatedTask)}
-            onChange={e => setUpdatedTask(e.target.value)}
-          />
+      <div className="todo-item-wrapper">
+          {todo.task}
       </div>
       <div
         className="todo-remove"
-        onClick={() => props.handleTodoRemove(props.todo.id)}
+        onClick={() => handleTodoRemove(todo.id)}
       >
         x
       </div>
-    </div>
+    </Reorder.Item>
   );
 }
 
