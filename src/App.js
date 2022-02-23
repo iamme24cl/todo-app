@@ -8,7 +8,6 @@ const App = () => {
   const [todos, setTodos] = useState([]);
   const [task, setTask] = useState('');
   const [isFetching, setIsFetching] = useState(true);
-  const baseUrl = "https://guarded-mountain-15696.herokuapp.com/";
 
   useEffect(() => {
     getTodos(setIsFetching, setTodos);
