@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useMotionValue, Reorder } from "framer-motion";
+import React from "react";
+import { Reorder } from "framer-motion";
 
 const TodoItem = (props) => {
   const { todo, handleUpdateTodoStatus, handleTodoRemove } = props;
